@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-solution-architecture-generator
+  labels:
+    app: customer-solution-architecture-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-solution-architecture-generator
+  template:
+    metadata:
+      labels:
+        app: customer-solution-architecture-generator
+    spec:
+      containers:
+        - name: api
+          image: customer-solution-architecture-generator:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-solution-architecture-generator
+spec:
+  selector:
+    app: customer-solution-architecture-generator
+  ports:
+    - port: 80
+      targetPort: 8080
