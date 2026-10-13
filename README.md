@@ -1,5 +1,12 @@
 # Customer Solution Architecture Generator
 
+## Overview
+
+An architecture generator for customer engineering work. The `POST /agent/run` endpoint reads a customer constraint and picks the modules to include; for example, a constraint that mentions a VPC adds private GKE to the design. It produces the diagram only, and any request to apply it is refused. A versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit records.
+
+- **Built with:** Python, pytest, Docker, GitHub Actions
+- **Scope:** Local lab with tests; it does not call a hosted model and refuses production apply.
+
 <!-- project-guide:start -->
 ## Project guide
 
